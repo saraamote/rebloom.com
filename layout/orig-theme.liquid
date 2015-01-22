@@ -1,0 +1,211 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  {% if settings.favicon_enable %}
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  {% endif %}
+
+  <!-- Title and description ================================================== -->
+  <title>
+  {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Product meta ================================================== -->
+  {% include 'open-graph-tags' %}
+  {% include 'twitter-card' %}
+
+  <!-- Helpers ================================================== -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  {% include 'google-fonts' %}
+
+  <!-- CSS ================================================== -->
+  {% if template contains 'index' or template contains 'product' %}
+    {{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'bespoke.css' | asset_url | stylesheet_tag }}
+
+  {% if settings.ajax_cart_enable %}
+  <!-- Ajaxify Cart Plugin ================================================== -->
+  {{ 'ajaxify.scss.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+
+  {% include 'oldIE-js' %}
+
+  {% comment %}
+    If you store has customers disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  {% comment %}
+    Theme dependent JS is loaded at the very bottom of this file for performance reasons.
+    However, jQuery is included here so that it can be used inside the templates, e.g. in product.liquid.
+  {% endcomment %}
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+  {{ 'modernizr.min.js' | asset_url | script_tag }}
+  {% if template contains 'index' or template contains 'product' %}
+    {{ 'owl.carousel.min.js' | asset_url | script_tag }}
+  {% endif %}
+
+</head>
+
+{% comment %}
+  Add the page template as a class for easy page or template specific styling.
+{% endcomment %}
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}{% if settings.home_section_1 == 'slider' and template == 'index' %}attached-slider {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+  <div class="bespoke-logo">
+
+    <a href="/"><img src="{{ 'rebloom-logo.png' | asset_url }}" alt="{{ shop.name }}" style="border: 0;"/></a>
+
+  </div>
+
+  <header class="site-header" role="banner">
+      <div class="wrapper">
+        <div class="grid--full">
+          <div class="mobile-nav--sticky">
+            <div class="grid-item medium--hide large--hide one-half mobile-nav__item">
+              <div id="mobileNavBar">
+                <button class="menu-toggle btn-link mobile-nav-bar__link">
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-menu" aria-hidden="true"></span>
+                  </span>
+                  Menu
+                </button>
+              </div>
+            </div>
+            <!--
+            <div class="grid-item medium--hide large--hide one-half text-right mobile-nav__item">
+              <a href="/cart" class="cart-toggle mobile-nav-bar__link">
+                Cart
+                <span class="cart-icon-wrapper">
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-cart" aria-hidden="true"></span>
+                  </span>
+                  <span class="cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+                </span>
+              </a>
+            </div>
+            -->
+          </div>
+          <!--
+          <div class="grid-item one-quarter small--hide header-login-wrapper">
+            {% if shop.customer_accounts_enabled %}
+              {% if customer %}
+                <a href="/account">
+                  {{ customer.first_name }}
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-user" aria-hidden="true"></span>
+                  </span>
+                </a>
+              {% else %}
+                <a href="/account/login">
+                  {{ 'customer.login.sign_in' | t }}
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-user" aria-hidden="true"></span>
+                  </span>
+                </a>
+              {% endif %}
+            {% endif %}
+          </div>
+          <div class="grid-item one-quarter small--hide header-cart-wrapper">
+            {% comment %}
+              Show number of items in the cart and total cost in the /cart link
+
+              Ajaxify Cart Notes:
+                - #cartToggle toggles cart visibility (drawer or modal)
+                - #cartCount updates the total number of items in the cart
+                - #cartCost updates the total cost of the cart
+                - Documentation:  https://shopify.github.io/Timber/#ajax-cart
+            {% endcomment %}
+            <a href="/cart" class="cart-toggle" id="cartToggle">
+              <span class="cart-icon-wrapper">
+                <span class="icon-fallback-text">
+                  <span class="icon icon-cart" aria-hidden="true"></span>
+                </span>
+                <span class="cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+              </span>
+              {{ 'layout.cart.title' | t }}
+            </a>
+          </div>
+          -->
+        </div>
+      </div>
+  </header>
+
+  <nav class="wrapper nav-bar" role="navigation">
+    {% include 'site-nav' %}
+  </nav>
+
+  <main class="wrapper main-content" role="main">
+
+    {{ content_for_layout }}
+
+  </main>
+
+  {% include 'footer' %}
+
+  {% comment %}
+    An (almost) empty JS file for you to place your code
+  {% endcomment %}
+  {{ 'shop.js' | asset_url | script_tag }}
+
+  {% comment %}
+    Ajaxify your cart with this plugin. Adding a product will reveal a drawer, modal, or confirmation button. Enabled by default in theme settings.
+
+    Ajaxify Cart Documentation:
+      - https://shopify.github.io/Timber/#ajax-cart
+  {% endcomment %}
+  {% if settings.ajax_cart_enable %}
+  {{ 'handlebars.min.js' | asset_url | script_tag }}
+  {% include 'ajax-cart-template' %}
+  {{ 'ajaxify.js' | asset_url | script_tag }}
+
+  <script>
+
+  jQuery(function($) {
+    ajaxifyShopify.init({
+      method: '{{ settings.ajax_cart_method }}',
+      wrapperClass: 'wrapper',
+      formSelector: '#addToCartForm',
+      addToCartSelector: '#addToCart',
+      cartCountSelector: '#cartCount',
+      cartCostSelector: '#cartCost',
+      toggleCartButton: '#cartToggle',
+      useCartTemplate: true,
+      btnClass: 'btn',
+      moneyFormat: {{ shop.money_format | json }},
+      disableAjaxCart: false,
+      enableQtySelectors: true,
+      prependDrawerTo: 'body',
+      onToggleCallback: timber.cartToggleCallback
+    });
+  });
+
+  </script>
+
+  {% endif %}
+
+</body>
+
+</html>

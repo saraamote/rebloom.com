@@ -1,0 +1,456 @@
+/*
+
+  all pages
+
+*/
+
+
+
+/* reset */
+
+
+body {
+
+  background: #2f1a45;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+}
+
+h1, h2, h3, h4, h5, ul, li, p {
+
+  line-height: 1em;
+  padding: 0;
+  margin: 0;
+  border: 0;
+
+}
+
+/* header logo */
+
+.bespoke-logo {
+
+  text-align: center;
+  padding: 45px 0 0 0;
+
+}
+
+.bespoke-logo img {
+
+  margin: auto;
+  width: 140px;
+
+}
+
+/* navigation */
+
+.bespoke-mobile-navigation,
+.bespoke-desktop-navigation {
+
+  display: none;
+
+}
+
+#mobile-navigation[type="checkbox"] {
+
+  display: none;
+
+}
+
+.close-mobile-menu,
+.mobile-menu-toggle {
+
+  position: fixed;
+  color: #fff;
+  right: 5px;
+  top: 5px;
+
+
+}
+
+#mobile-navigation:checked ~ .bespoke-mobile-navigation {
+
+  background: #2f1a45;
+  text-align: center;
+  position: fixed;
+  display: block;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+
+}
+
+.bespoke-mobile-navigation a {
+
+  text-transform: uppercase;
+  display: block;
+  color: #fff;
+
+}
+
+
+
+
+
+
+/***************
+
+index page
+
+****************/
+
+
+
+.rebloom-intro {
+
+  background: url( {{ 'rebloom-bg-001.png' | asset_url }} ) no-repeat;
+  text-align: center;
+
+}
+
+.all-natural-sleep-drink {
+
+  text-transform: uppercase;
+  background: #ffffff;
+  text-align: center;
+
+}
+
+.all-natural-sleep-drink h2 {
+
+  color: #2f1a45;
+
+}
+
+.all-natural-sleep-drink h3 {
+
+  color: #6f617f;
+
+}
+
+.all-natural-sleep-drink .order-button {
+
+  display: none;
+
+}
+
+
+
+
+
+
+/*
+
+press
+
+*/
+
+.rebloom-press {
+
+  background: #cec1b6;
+  text-align: center;
+
+}
+
+.rebloom-press h2 {
+
+  color: #2f1a45;
+
+}
+
+.rebloom-press ul {
+
+  background: #cec4be;
+
+}
+
+.rebloom-press ul li {
+
+  display: inline-block;
+
+}
+
+.press-snippet:before {
+
+  position: absolute;
+  content: '';
+  background: url( {{ 'rebloom-quote.png' | asset_url }} ) no-repeat;
+  background-size: contain;
+  height: 70px;
+  width: 100px;
+  left: 0;
+  top: 0;
+
+}
+
+.press-snippet {
+
+    position: relative;
+
+}
+
+.press-snippet:after {
+
+  position: absolute;
+  content: '';
+  background-size: contain;
+  height: 50px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+
+}
+
+.press-snippet.instyle:after {
+
+  background: url( {{ 'rebloom-press-instyle.png' | asset_url }} ) no-repeat;
+
+}
+
+.press-snippet.newbeauty:after {
+
+  background: url( {{ 'rebloom-press-newbeauty.png' | asset_url }} ) no-repeat;
+
+}
+
+.press-snippet.shape:after {
+
+  background: url( {{ 'rebloom-press-shape.png' | asset_url }} ) no-repeat;
+
+}
+
+.press-snippet.seventeen:after {
+
+  background: url( {{ 'rebloom-press-seventeen.png' | asset_url }} ) no-repeat;
+
+}
+
+.press-snippet p {
+
+  white-space: pre-wrap;
+  color: #2f1a45;
+  padding: 40px;
+
+}
+
+
+
+
+
+
+/*
+
+ingredients
+
+*/
+
+.whats-inside {
+
+  background: #ffffff;
+  text-align: center;
+  font-size: 0;
+
+}
+
+.whats-inside h4 {
+
+  color: #2f1a45;
+
+}
+
+.whats-inside p {
+
+  color: #6f617f;
+
+}
+
+.whats-inside ul li {
+
+  display: inline-block;
+  white-space: pre-wrap;
+  font-size: 16px;
+  width: 80%;
+
+}
+
+.whats-inside ul li img {
+
+  width: 100%;
+
+}
+
+.whats-not-inside {
+
+  background: #d4b9bf;
+  text-align: center;
+
+}
+
+.clinically-proven {
+
+  background: #2f1a45;
+  color: #ffffff;
+
+}
+
+.clinically-proven .results p {
+
+  color: #d1b1bb;
+
+}
+
+.clinically-proven .results h3,
+.clinically-proven .results h4 {
+  color: #ffffff;
+
+}
+
+.clinically-proven .results h4 {
+
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-size: 20px;
+
+}
+
+.clinically-proven .results em {
+
+  font-size: 40px;
+  display: block;
+  color: #d1b1bb;
+  padding: 20px;
+
+}
+
+
+
+
+
+
+/*
+
+product form
+
+*/
+
+.order-rebloom {
+
+  background: #db8d53;
+
+}
+
+.order-rebloom .directions {
+
+  color: #f2f2f2;
+
+}
+
+.order-rebloom .details {
+
+  background: #d88644;
+
+}
+
+.order-rebloom .guarantee {
+
+  background: #ffffff;
+  color: #2f1a45;
+
+}
+
+.order-rebloom .guarantee em {
+
+  display: block;
+  color: #54b0e3;
+  padding: 20px;
+
+}
+
+
+
+
+
+
+/*
+
+support team
+
+*/
+
+.support-team {
+
+  background: #f2f2f2;
+
+}
+
+.support-team h4 {
+
+  color: #2f1a45;
+
+}
+
+.support-team p {
+
+  color: #958ca0;
+  padding: 20px;
+
+}
+
+.support-team img {
+
+  width: 100%;
+
+}
+
+
+
+
+
+
+/*
+
+footer
+
+*/
+
+.bespoke-footer {
+
+  border-bottom: 1px solid #958ca0;
+  background: #3a294f;
+  color: #958ca0;
+  padding: 40px;
+
+}
+
+
+
+
+
+
+/***************
+
+trial page
+
+****************/
+
+
+
+
+
+
+/***************
+
+shopping cart
+
+****************/
+
+
+
+.bespoke-cart {
+
+  background: #fff;
+
+}

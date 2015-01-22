@@ -1,0 +1,244 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  {% if settings.favicon_enable %}
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  {% endif %}
+
+  <!-- Title and description ================================================== -->
+  <title>
+  {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Product meta ================================================== -->
+  {% include 'open-graph-tags' %}
+  {% include 'twitter-card' %}
+
+  <!-- Helpers ================================================== -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  {% include 'google-fonts' %}
+
+  <!-- CSS ================================================== -->
+  {% if template contains 'index' or template contains 'product' %}
+    {{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'bespoke.css' | asset_url | stylesheet_tag }}
+  {{ 'font.css' | asset_url | stylesheet_tag }}
+
+  {% if settings.ajax_cart_enable %}
+  <!-- Ajaxify Cart Plugin ================================================== -->
+  {{ 'ajaxify.scss.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+
+  {% include 'oldIE-js' %}
+
+  {% comment %}
+    If you store has customers disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  {% comment %}
+    Theme dependent JS is loaded at the very bottom of this file for performance reasons.
+    However, jQuery is included here so that it can be used inside the templates, e.g. in product.liquid.
+  {% endcomment %}
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+  {{ 'modernizr.min.js' | asset_url | script_tag }}
+  {% if template contains 'index' or template contains 'product' %}
+    {{ 'owl.carousel.min.js' | asset_url | script_tag }}
+  {% endif %}
+
+  <!-- custom fonts -->
+
+  <script src="//use.typekit.net/gso5mza.js"></script>
+
+  <script>try{Typekit.load();}catch(e){}</script>
+
+</head>
+
+{% comment %}
+  Add the page template as a class for easy page or template specific styling.
+{% endcomment %}
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}{% if settings.home_section_1 == 'slider' and template == 'index' %}attached-slider {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+
+  <a href="/">
+
+    <div class="bespoke-logo {% if template contains 'cart' %}cart-logo{% endif %}"></div>
+
+  </a>
+
+  <div class="bespoke-desktop-navigation {% if template contains 'cart' %}cart-nav{% endif %}">
+
+    <div class="bdn-left">
+
+      <ul>
+
+      {% for link in linklists.main-menu-left.links %}
+
+        <li>
+
+          <a href="{{ link.url }}">{{ link.title }}</a>
+
+        </li>
+
+      {% endfor %}
+
+      </ul>
+
+    </div>
+
+    <div class="bdn-right">
+
+      <ul>
+
+      {% for link in linklists.main-menu-right.links %}
+
+        <li>
+
+          <a href="{{ link.url }}">{{ link.title }}</a>
+
+        </li>
+
+      {% endfor %}
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <input type="checkbox" id="mobile-navigation">
+
+  <label for="mobile-navigation" class="mobile-menu-toggle">Menu</label>
+
+  <div class="bespoke-mobile-navigation">
+
+    <label for="mobile-navigation" class="close-mobile-menu">Close Menu</label>
+
+    <div class="bespoke-logo">
+
+      <a href="/"><img src="{{ 'rebloom-logo.svg' | asset_url }}" alt="{{ shop.name }}"/></a>
+
+    </div>
+
+    <ul>
+    {% for link in linklists.main-menu.links %}
+
+      <li>
+
+        <a href="{{ link.url }}" onclick="document.getElementById('mobile-navigation').checked = false">{{ link.title }}</a>
+
+      </li>
+
+    {% endfor %}
+
+    </ul>
+
+  </div>
+
+  <div class="bespoke-main-content">
+
+    {{ content_for_layout }}
+
+  </div>
+
+  <div class="bespoke-footer">
+
+    <p>
+
+      THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FDA. THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.
+
+    </p>
+
+    <p>
+
+      © 2013 INNOVATIVE BRANDS LLC, ALL RIGHTS RESERVED. REBLOOM AND INNOVATIVE BRANDS ARE REGISTERED TRADEMARKS OF INNOVATIVE BRANDS LLC
+  ￼
+
+    </p>
+
+  </div>
+
+  <div class="bespoke-sub-footer">
+
+    <a href="/"><img src="{{ 'rebloom-logo.svg' | asset_url }}" alt="{{ shop.name }}"/></a>
+
+
+        <li class="footer-links">
+
+          {% for link in linklists.footer.links %}
+
+          <a href="{{ link.url }}">{{ link.title }}</a>
+
+          {% endfor %}
+
+        </li>
+
+  </div>
+￼
+
+  {% comment %}
+    An (almost) empty JS file for you to place your code
+  {% endcomment %}
+  {{ 'shop.js' | asset_url | script_tag }}
+
+  {% comment %}
+    Ajaxify your cart with this plugin. Adding a product will reveal a drawer, modal, or confirmation button. Enabled by default in theme settings.
+
+    Ajaxify Cart Documentation:
+      - https://shopify.github.io/Timber/#ajax-cart
+  {% endcomment %}
+  {% if settings.ajax_cart_enable %}
+  {{ 'handlebars.min.js' | asset_url | script_tag }}
+  {% include 'ajax-cart-template' %}
+  {{ 'ajaxify.js' | asset_url | script_tag }}
+
+  <script>
+
+  jQuery(function($) {
+    ajaxifyShopify.init({
+      method: '{{ settings.ajax_cart_method }}',
+      wrapperClass: 'wrapper',
+      formSelector: '#addToCartForm',
+      addToCartSelector: '#addToCart',
+      cartCountSelector: '#cartCount',
+      cartCostSelector: '#cartCost',
+      toggleCartButton: '#cartToggle',
+      useCartTemplate: true,
+      btnClass: 'btn',
+      moneyFormat: {{ shop.money_format | json }},
+      disableAjaxCart: false,
+      enableQtySelectors: true,
+      prependDrawerTo: 'body',
+      onToggleCallback: timber.cartToggleCallback
+    });
+  });
+
+  </script>
+
+  {% endif %}
+
+</body>
+
+</html>

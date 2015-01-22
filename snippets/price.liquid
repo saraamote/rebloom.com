@@ -1,0 +1,9 @@
+{% if shop.money_format == '${{amount}}' %}
+  {{ price | money | remove: '.00' | replace: '$','<sup>$</sup>' | replace: '.','<sup>' }}</sup>
+{% elsif shop.money_format == '${{amount_with_comma_separator}}' %}
+  {{ price | money | remove: ',00' | replace: '$','<sup>$</sup>' | replace: ',','<sup>' }}</sup>
+{% elsif shop.money_format == '${{amount_no_decimals}}' %}
+  {{ price | money | remove: '.00' | replace: '$', '<sup>$</sup>'}}
+{% else %}
+  <small>{{ price | money }}</small>
+{% endif %}

@@ -1,0 +1,38 @@
+
+        <form class="form-add-to-cart form-horizontal" action="/cart/add" method="post" enctype="multipart/form-data" id="addToCartForm">
+
+          <select name="id" id="productSelect" class="product-variants">
+
+            {% for variant in product.variants %}
+
+                <option selected="selected" value="{{ variant.id }}">
+
+                  {{ variant.title }}
+
+              </option>
+
+
+
+          </select>
+
+          <span id="productPrice" class="product-price" itemprop="price">
+
+              {{ variant.price | money }}
+
+          </span>
+
+          {% endfor %}
+
+          <!-- shopify purchase -->
+
+          <div class="form-item-container add-to-cart-container">
+
+            <button type="submit" name="add" id="addToCart" class="btn order-now">
+
+              <span id="addToCartText">Order ReBloom</span>
+
+            </button>
+
+          </div>
+
+        </form>

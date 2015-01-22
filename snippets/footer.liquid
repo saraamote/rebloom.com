@@ -1,0 +1,88 @@
+{% assign index = 0 %}
+
+ {% if settings.footer_quicklinks_enable %}{% assign index = index | plus: 1 %}{% endif %}
+ {% if settings.footer_social_enable %}{% assign index = index | plus: 1 %}{% endif %}
+ {% if settings.footer_custom_enable %}{% assign index = index | plus: 1 %}{% endif %}
+ {% if settings.footer_newsletter_enable %}{% assign index = index | plus: 1 %}{% endif %}
+
+{% case index %}
+  {% when 1 %}
+    {% assign footer_item_width = 'medium--one-half large--one-half push--medium--one-quarter push--large--one-quarter text-center' %}
+  {% when 2 %}
+    {% assign footer_item_width = 'medium--one-half large--one-third push--large--one-sixth' %}
+  {% when 3 %}
+    {% assign footer_item_width = 'medium--one-third large--one-quarter push--large--one-eighth' %}
+  {% when 4 %}
+    {% assign footer_item_width = 'medium--one-half large--one-quarter' %}
+{% endcase %}
+
+<footer class="site-footer" role="contentinfo">
+  {% if index > 0 %}
+    <div class="wrapper wrapper-footer-body">
+      <hr>
+      <div class="grid">
+        {% if settings.footer_quicklinks_enable %}
+          <div class="grid-item {{ footer_item_width }}">
+            <h3 class="footer-heading">{{ 'layout.footer.linklist_title' | t }}</h3>
+            <ul class="footer-quick-links">
+              {% for link in linklists[settings.footer_quicklinks_linklist].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {% if settings.footer_social_enable %}
+          <div class="grid-item {{ footer_item_width }}">
+          <h3 class="footer-heading">{{ 'layout.footer.social_title' | t }}</h3>
+            {% include 'social-buttons' %}
+          </div>
+        {% endif %}
+
+        {% if settings.footer_custom_enable %}
+          <div class="grid-item {{ footer_item_width }}">
+            <h3 class="footer-heading">{{ settings.footer_custom_title }}</h3>
+            <div class="custom-content">
+              {{settings.footer_custom_text}}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if settings.footer_newsletter_enable %}
+          <div class="grid-item {{ footer_item_width }}">
+            <h3 class="footer-heading">{{ 'layout.footer.newsletter_title' | t }}</h3>
+            {% include 'newsletter-form' %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+  <div class="wrapper wrapper-footer-legal">
+    <hr>
+    <div class="grid">
+      <div class="grid-item wrapper-legal large--one-half">
+        <p>
+          <small>&copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}.</small>
+          <small>{{ powered_by_link }}</small>
+        </p>
+      </div>
+      {% comment %}
+        Loop through available payment methods and show their icons.
+      {% endcomment %}
+      <div class="grid-item wrapper-accepted-payments large--one-half">
+        {% unless shop.enabled_payment_types == empty %}
+        <ul class="inline-list payment-icons">
+          {% for type in shop.enabled_payment_types %}
+            <li>
+              <span class="icon-fallback-text">
+                <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                <span class="fallback-text">{{type | replace: '_',' '}}</span>
+              </span>
+            </li>
+          {% endfor %}
+        </ul>
+        {% endunless %}
+      </div>
+    </div>
+  </div>
+</footer>
