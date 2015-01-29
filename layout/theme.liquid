@@ -81,7 +81,6 @@
 {% endcomment %}
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}{% if settings.home_section_1 == 'slider' and template == 'index' %}attached-slider {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
-
   <a href="/">
 
     <div class="bespoke-logo {% if template contains 'cart' %}cart-logo{% endif %}"></div>
@@ -127,6 +126,9 @@
     </div>
 
   </div>
+
+  <a href="/cart" class="bespoke-cart-nav">cart</a>
+
 
   <input type="checkbox" id="mobile-navigation">
 

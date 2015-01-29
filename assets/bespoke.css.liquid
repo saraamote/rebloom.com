@@ -64,6 +64,14 @@ h1, h2, h3, h4, h5, ul, li, p {
 
 
 
+/* cart */
+
+.bespoke-cart-nav {
+
+  display: none;
+
+}
+
 
 /* navigation */
 
@@ -2855,8 +2863,30 @@ main
 navigation + press text
 */
 
-@media only screen and (min-width: 1060px) {
+@media only screen and (min-width: 1080px) {
 
+  .bespoke-cart-nav {
+
+    background-image: url({{ 'bag-white.png' | asset_url }});
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: transparent;
+    position: absolute;
+    display: block;
+    opacity: 0.95;
+    z-index: 100;
+    width: 20px;
+    height: 20px;
+    right: 13px;
+    top: 43px;
+
+  }
+
+  .bespoke-cart-nav img {
+
+    width: 20px;
+
+  }
 
 
   .mobile-menu-toggle {
