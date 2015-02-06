@@ -140,13 +140,15 @@ h1, h2, h3, h4, h5, ul, li, p {
 .bespoke-cart-nav {
 
   display: none;
+  white-space: nowrap;
+  text-indent: 100%;
+  overflow: hidden;
 
 }
 
 
 /* navigation */
 
-.bespoke-mobile-navigation,
 .bespoke-desktop-navigation {
 
   display: none;
@@ -196,39 +198,62 @@ h1, h2, h3, h4, h5, ul, li, p {
 
 }
 
-#mobile-navigation:checked ~ .bespoke-mobile-navigation {
+.bespoke-mobile-navigation {
+
+  -webkit-transition: left 750ms ease-in-out;
+  -moz-transition: left 750ms ease-in-out;
+  -o-transition: left 750ms ease-in-out;
+  transition: left 750ms ease-in-out;
 
   background: #2f1a45;
   text-align: center;
   overflow: scroll;
   position: fixed;
-  display: block;
   z-index: 900;
   bottom: 0;
   right: 0;
-  left: 0;
+  left: 100%;
   top: 0;
 
 }
+
+#mobile-navigation:checked ~ .bespoke-mobile-navigation {
+
+  left: 0;
+
+}
+
+.bespoke-mobile-navigation li a {
+
+  -webkit-transition: all 750ms 500ms ease-in-out;
+  -moz-transition: all 750ms 500ms ease-in-out;
+  -o-transition: all 750ms 500ms ease-in-out;
+  transition: all 750ms 500ms ease-in-out;
+
+
+  font: 700 2.5rem "nimbus-sans-condensed", sans-serif;
+  border-bottom: 2px solid #2f1a45;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  display: inline-block;
+  margin: 40px 0 0 0;
+  color: #2f1a45;
+
+}
+
+#mobile-navigation:checked ~ .bespoke-mobile-navigation li a {
+
+  border-bottom: 2px solid #e0e0e0;
+  color: #e0e0e0;
+
+}
+
 
 .bespoke-mobile-navigation ul {
 
   padding: 120px 0 10px 0;
 
 }
-
-.bespoke-mobile-navigation li a {
-
-  font: 700 2.5rem "nimbus-sans-condensed", sans-serif;
-  border-bottom: 2px solid #e0e0e0;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  display: inline-block;
-  margin: 40px 0 0 0;
-  color: #e0e0e0;
-
-}
-
 
 
 
@@ -2057,6 +2082,12 @@ main
 
   }
 
+  .rebloom-intro .order-button:hover {
+
+    background: #4b9ecc;
+
+  }
+
 
   .all-natural-sleep-drink img {
 
@@ -2945,7 +2976,7 @@ navigation + press text
     position: absolute;
     display: block;
     opacity: 0.95;
-    z-index: 100;
+    z-index: 200;
     width: 20px;
     height: 20px;
     right: 13px;
