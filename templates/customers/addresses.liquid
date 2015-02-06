@@ -11,16 +11,13 @@
 
 {% layout settings.customer_layout %}
 
-<header class="section-header">
-  <h1 class="section-header--left">{{ 'customer.account.title' | t }}</h1>
-  <div class="section-header--right">
-    <a href="#" class="btn" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">{{ 'customer.addresses.add_new' | t }}</a>
-  </div>
-</header>
+<div class="bespoke-account grid">
 
-<hr class="hr--small">
+  <h1>{{ 'customer.account.title' | t }}</h1>
 
-<div class="grid">
+  <div>
+      <a href="#" class="btn" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">{{ 'customer.addresses.add_new' | t }}</a>
+    </div>
 
   <div class="grid-item one-third medium-down--one-whole">
     <p><a href="/account">{{ 'customer.account.return' | t }}</a></p>
