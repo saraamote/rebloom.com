@@ -200,10 +200,10 @@ h1, h2, h3, h4, h5, ul, li, p {
 
 .bespoke-mobile-navigation {
 
-  -webkit-transition: left 750ms ease-in-out;
-  -moz-transition: left 750ms ease-in-out;
-  -o-transition: left 750ms ease-in-out;
-  transition: left 750ms ease-in-out;
+  -webkit-transition: all 750ms ease-in-out;
+  -moz-transition: all 750ms ease-in-out;
+  -o-transition: all 750ms ease-in-out;
+  transition: all 750ms ease-in-out;
 
   background: #2f1a45;
   text-align: center;
@@ -211,7 +211,7 @@ h1, h2, h3, h4, h5, ul, li, p {
   position: fixed;
   z-index: 900;
   bottom: 0;
-  right: 0;
+  right: -100%;
   left: 100%;
   top: 0;
 
@@ -219,17 +219,17 @@ h1, h2, h3, h4, h5, ul, li, p {
 
 #mobile-navigation:checked ~ .bespoke-mobile-navigation {
 
+  right: 0;
   left: 0;
 
 }
 
 .bespoke-mobile-navigation li a {
 
-  -webkit-transition: all 750ms 500ms ease-in-out;
-  -moz-transition: all 750ms 500ms ease-in-out;
-  -o-transition: all 750ms 500ms ease-in-out;
-  transition: all 750ms 500ms ease-in-out;
-
+  -webkit-transition: all 750ms 350ms ease-in-out;
+  -moz-transition: all 750ms 350ms ease-in-out;
+  -o-transition: all 750ms 350ms ease-in-out;
+  transition: all 750ms 350ms ease-in-out;
 
   font: 700 2.5rem "nimbus-sans-condensed", sans-serif;
   border-bottom: 2px solid #2f1a45;
