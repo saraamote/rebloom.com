@@ -1655,7 +1655,22 @@ pages
 
 }
 
+.bespoke-page-nav {
 
+  display: none;
+  white-space: nowrap;
+  text-indent: 100%;
+  overflow: hidden;
+
+}
+
+.bespoke-desktop-navigation.page-nav {
+
+  background: #27143E;
+  padding: 45px 0;
+  top: 0;
+
+}
 
 /***************
 
@@ -2891,9 +2906,14 @@ main
 
   }
 
-  .rebloom-guarantee p {
+  .rebloom-guarantee-copy {
 
     display: inline-block;
+
+  }
+
+  .rebloom-guarantee p {
+
     font-size: 1.8rem;
     max-width: 630px;
     text-align: left;
@@ -2998,6 +3018,7 @@ navigation + press text
 
 @media only screen and (min-width: 1080px) {
 
+  .bespoke-page-nav,
   .bespoke-cart-nav {
 
     background-image: url({{ 'bag-white.png' | asset_url }});
@@ -3015,6 +3036,7 @@ navigation + press text
 
   }
 
+  .bespoke-page-nav img,
   .bespoke-cart-nav img {
 
     width: 20px;

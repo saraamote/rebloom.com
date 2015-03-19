@@ -87,7 +87,7 @@
 
   </a>
 
-  <div class="bespoke-desktop-navigation {% if template contains 'cart' %}cart-nav{% endif %}">
+  <div class="bespoke-desktop-navigation {% if template contains 'cart' %}cart-nav{% elsif template contains 'page' %}page-nav{% endif %}">
 
     <div class="bdn-left">
 
@@ -175,7 +175,7 @@
 
     <p>
 
-      © 2013 INNOVATIVE BRANDS LLC, ALL RIGHTS RESERVED. REBLOOM AND INNOVATIVE BRANDS ARE REGISTERED TRADEMARKS OF INNOVATIVE BRANDS LLC
+      © <script>document.write(new Date().getFullYear())</script> INNOVATIVE BRANDS LLC, ALL RIGHTS RESERVED. REBLOOM AND INNOVATIVE BRANDS ARE REGISTERED TRADEMARKS OF INNOVATIVE BRANDS LLC
   ￼
 
     </p>
